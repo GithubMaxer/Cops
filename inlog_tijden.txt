@@ -1,0 +1,38 @@
+Inlog tijden 
+
+Om ervoor te zorgen dat inloggen in het bedrijfsnetwerk alleen is toegestaan binnen bepaalde tijdsvensters, kun je gebruikmaken van de "Logon Hours" functie in Active Directory. Hiermee kun je specifieke inlogtijden instellen voor domeingebruikers. Hieronder staan de gedetailleerde stappen om dit te configureren.
+
+Stap 1: Open Active Directory Users and Computers
+Zoek naar "Active Directory Users and Computers" in het Startmenu of voer dsa.msc uit.
+Stap 2: Selecteer de Gebruiker of Gebruikersgroep
+Gebruikersselectie:
+
+Om de instellingen voor één gebruiker te configureren, zoek en selecteer de gebruiker in de juiste OU.
+Om de instellingen voor meerdere gebruikers te configureren, maak een groep met de gebruikers waarvoor je de logon hours wilt instellen.
+Rechtermuisklik op de Gebruiker of Groep:
+
+Klik met de rechtermuisknop op de geselecteerde gebruiker of groep en kies "Properties".
+Stap 3: Instellen van Logon Hours
+Ga naar het tabblad Account.
+Klik op de knop Logon Hours.
+Stap 4: Configureren van de Toegestane Logon Hours
+Maandag tot en met Vrijdag (8.00 uur tot 18.00 uur):
+
+Klik en sleep om de tijd van 8:00 AM tot 6:00 PM te selecteren voor maandag tot en met vrijdag.
+De geselecteerde tijdblokken worden blauw.
+Zaterdag (9.00 uur tot 15.00 uur):
+
+Klik en sleep om de tijd van 9:00 AM tot 3:00 PM te selecteren voor zaterdag.
+De geselecteerde tijdblokken worden blauw.
+Zondag (Geen toegang):
+
+Zorg ervoor dat zondag niet wordt geselecteerd. Dit betekent dat zondag geen tijdsblokken blauw zijn.
+Klik op OK om de wijzigingen op te slaan.
+
+Stap 5: Bevestigen en Toepassen
+Klik op Apply en vervolgens op OK om de instellingen op te slaan en het venster te sluiten.
+
+Monitoring en Beheer
+Gebruik Event Viewer om inlogpogingen buiten de toegestane uren te monitoren.
+Regelmatige audits uitvoeren om te controleren of de logon hours correct zijn ingesteld en gehandhaafd worden.
+Met deze stappen kun je ervoor zorgen dat inloggen in het bedrijfsnetwerk alleen is toegestaan binnen de opgegeven tijdsvensters, wat de beveiliging en het beheer van gebruikersaccounts in je omgeving verbetert.

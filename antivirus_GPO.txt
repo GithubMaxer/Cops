@@ -1,0 +1,50 @@
+Op elke client en server dient altijd een standaard antivirusoplossing werkzaam en up-to-date te zijn. 
+
+Om ervoor te zorgen dat op elke client en server altijd een standaard antivirusoplossing werkzaam en up-to-date is, kun je gebruikmaken van Microsoft Defender Antivirus, dat standaard is ingebouwd in Windows 10/11 en Windows Server 2016/2019/2022. Hieronder staan de stappen om ervoor te zorgen dat Microsoft Defender Antivirus altijd ingeschakeld en up-to-date is via Group Policy.
+
+Instellen van Microsoft Defender Antivirus via Group Policy
+1. Open Group Policy Management Console (GPMC):
+Zoek naar "Group Policy Management" in het Startmenu of voer gpmc.msc uit.
+2. Maak een nieuwe GPO of bewerk een bestaande GPO:
+Maak een nieuwe GPO en geef deze een naam zoals "Antivirus Policy" of bewerk een bestaande GPO die van toepassing is op de clients en servers.
+3. Navigeren naar de Microsoft Defender Antivirus-instellingen:
+Ga naar Computer Configuration -> Policies -> Administrative Templates -> Windows Components -> Microsoft Defender Antivirus.
+4. Configureer de belangrijkste instellingen:
+Turn on Microsoft Defender Antivirus:
+
+Instellen op: Enabled
+Zorgt ervoor dat Microsoft Defender Antivirus is ingeschakeld op alle clients en servers.
+Configure Microsoft Defender Antivirus to check for the latest virus and spyware security intelligence updates:
+
+Instellen op: Enabled
+Zorg ervoor dat updates voor virus- en spywaredefinities regelmatig worden gedownload en geïnstalleerd.
+Define the number of days before spyware and virus definitions are considered out of date:
+
+Instellen op: Enabled
+Stel een limiet in, bijvoorbeeld 1 dag, om ervoor te zorgen dat definities altijd up-to-date zijn.
+Specify the day of the week to check for security intelligence updates:
+
+Instellen op: Enabled
+Dit is optioneel, maar je kunt specifieke dagen instellen om te controleren op updates.
+Real-time Protection:
+
+Configure Turn on real-time protection:
+Instellen op: Enabled
+Zorgt ervoor dat real-time bescherming altijd is ingeschakeld.
+Configure Turn on behavior monitoring:
+Instellen op: Enabled
+Zorgt ervoor dat gedragsmonitoring altijd is ingeschakeld.
+MAPS (Microsoft Active Protection Service):
+
+Configure the 'Join Microsoft MAPS' setting:
+Instellen op: Basic MAPS of Advanced MAPS afhankelijk van het gewenste niveau van gegevensdeling met Microsoft.
+Scheduled Scans:
+
+Configure the 'Specify the day of the week to run a scheduled scan' setting:
+Instellen op: Enabled en kies een dag en tijd om ervoor te zorgen dat er regelmatig geplande scans worden uitgevoerd.
+5. Forceer het beleid op de clients en servers:
+Open een command prompt als administrator op de clients en servers en voer gpupdate /force uit.
+Monitoring en Beheer
+Gebruik Windows Event Viewer en Microsoft Endpoint Configuration Manager (voorheen SCCM) om te monitoren of Microsoft Defender Antivirus up-to-date is en goed functioneert.
+Voer regelmatige audits uit om te controleren of alle systemen voldoen aan het antivirusbeleid.
+Door deze stappen te volgen, zorg je ervoor dat elke client en server altijd beschermd is door een up-to-date antivirusoplossing, wat bijdraagt aan de algehele beveiliging van je netwerk.

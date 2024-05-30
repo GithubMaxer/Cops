@@ -1,0 +1,58 @@
+Alle data op clients moeten voorzien zijn van encryptie.
+Alle klantgegevens moeten voorzien zijn van encryptie, intern en extern.
+
+
+Voor het implementeren van een encryptiebeleid dat ervoor zorgt dat alle data op clients voorzien is van encryptie en alle klantgegevens zowel intern als extern versleuteld worden, zijn er specifieke instellingen die je moet configureren in de Group Policy Management Editor. Hier zijn de stappen en instellingen die je moet inschakelen:
+
+BitLocker Configuratie voor Clients
+1. Encryptie van alle data op clients
+Belangrijkste instellingen:
+
+Enforce drive encryption type on operating system drives:
+
+Instellen op: Enabled
+Kies "Full encryption" om ervoor te zorgen dat de hele schijf versleuteld is.
+Configure use of passwords for operating system drives:
+
+Instellen op: Enabled
+Zorg ervoor dat wachtwoordbeveiliging wordt gebruikt voor extra veiligheid.
+Require additional authentication at startup:
+
+Instellen op: Enabled
+Dit zorgt ervoor dat gebruikers extra authenticatie moeten uitvoeren voordat de computer kan opstarten.
+Allow network unlock at startup (optioneel, afhankelijk van netwerkconfiguratie):
+
+Instellen op: Enabled
+Handig voor systemen die automatisch moeten opstarten zonder gebruikersinteractie.
+Configure TPM platform validation profile for BIOS-based firmware configurations:
+
+Instellen op: Enabled
+Configureer de TPM-validatieprofielen zoals vereist.
+Stappen om deze instellingen te configureren:
+
+Open de Group Policy Management Console (GPMC).
+Maak een nieuwe GPO of bewerk een bestaande GPO die van toepassing is op de client computers.
+Navigeer naar de BitLocker instellingen:
+Computer Configuration -> Policies -> Administrative Templates -> Windows Components -> BitLocker Drive Encryption -> Operating System Drives.
+Configureer de bovenstaande instellingen volgens de beschrijvingen.
+Encryptie van Klantgegevens Intern en Extern
+2. Encryptie van klantgegevens, intern en extern
+Dit vereist zowel beleid voor encryptie in rust als voor encryptie tijdens overdracht.
+
+Encryptie in Rust (At Rest):
+
+Gebruik BitLocker voor schijven waar klantgegevens worden opgeslagen (zie bovenstaande configuratie).
+Gebruik Encrypting File System (EFS) voor specifieke mappen/bestanden.
+Encryptie Tijdens Overdracht (In Transit):
+
+Gebruik TLS (Transport Layer Security) voor netwerkcommunicatie.
+Versleutel bestanden voordat ze worden overgedragen met tools zoals 7-Zip of WinRAR met wachtwoordbeveiliging.
+Configureer VPN-instellingen voor veilige externe toegang.
+EFS Configuratie:
+
+Schakel EFS in voor specifieke mappen/bestanden:
+Rechterklik op de map of het bestand -> Kies "Properties" -> Klik op de knop "Advanced" -> Vink "Encrypt contents to secure data" aan.
+Monitoring en Beheer
+Gebruik Windows Event Viewer en andere monitoring tools om te controleren of de encryptiebeleid wordt nageleefd.
+Voer regelmatig audits uit om de naleving van het encryptiebeleid te controleren.
+Door deze stappen en configuraties in te stellen, zorg je ervoor dat alle data op clients en alle klantgegevens zowel intern als extern versleuteld zijn, in overeenstemming met het encryptiebeleid.

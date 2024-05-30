@@ -1,0 +1,65 @@
+Wachtwoord Policy's 
+
+Het implementeren van een wachtwoordbeleid met de gespecificeerde vereisten in een Windows Server 2019-omgeving kan worden uitgevoerd via Group Policy Management en een speciaal op maat gemaakte passfilt.dll voor complexe vereisten die niet standaard in Windows kunnen worden afgedwongen. Hier is een stapsgewijze handleiding om dit te realiseren:
+
+Standaard Wachtwoordbeleid Configureren
+1. Open Group Policy Management Console (GPMC):
+Zoek naar "Group Policy Management" in het Startmenu of voer gpmc.msc uit.
+2. Maak een nieuwe GPO of bewerk een bestaande GPO:
+Maak een nieuwe GPO en geef deze een naam zoals "Custom Password Policy" of bewerk een bestaande GPO die van toepassing is op de gewenste OU (Organizational Unit).
+3. Navigeren naar de wachtwoordbeleid-instellingen:
+Ga naar Computer Configuration -> Policies -> Windows Settings -> Security Settings -> Account Policies -> Password Policy.
+4. Configureer de wachtwoordinstellingen:
+Minimum password length:
+
+Stel deze in op 12 karakters.
+Maximum password age:
+
+Stel deze in op een redelijke periode zoals 60 dagen om regelmatig wachtwoordwijzigingen af te dwingen.
+Enforce password history:
+
+Stel deze in op 4 wachtwoorden om ervoor te zorgen dat gebruikers geen recent gebruikte wachtwoorden kunnen hergebruiken.
+Password must meet complexity requirements:
+
+Stel deze in op Enabled. Dit zal ervoor zorgen dat wachtwoorden minstens één hoofdletter, één kleine letter, één cijfer en één speciaal teken bevatten.
+Minimum password age:
+
+Stel deze in op 1 dag om te voorkomen dat gebruikers snel achter elkaar hun wachtwoord veranderen om eerdere wachtwoorden opnieuw te gebruiken.
+Extra Wachtwoordcomplexiteit Configureren
+Voor de vereisten die niet kunnen worden afgedwongen via standaard Group Policy-instellingen (zoals specifieke toegestane tekensets en de controle dat de gebruikersnaam niet hetzelfde is als het wachtwoord), moet een aangepaste wachtwoordfilter DLL (passfilt.dll) worden gebruikt.
+
+Aangepaste passfilt.dll gebruiken:
+Ontwikkel of verkrijg een aangepaste passfilt.dll die de specifieke vereisten implementeert:
+
+Deze DLL moet:
+Alleen letters a-z en A-Z accepteren.
+Minstens één cijfer (0-9) vereisen.
+Minstens één hoofdletter vereisen.
+Minstens één van de volgende tekens vereisen: ! % # ( ) _ + - \ < > / = { } [ ] |
+Gebruikersnaam niet toestaan als wachtwoord.
+Plaats de aangepaste DLL in de System32-directory:
+
+Kopieer de aangepaste passfilt.dll naar C:\Windows\System32.
+Registreer de aangepaste passfilt.dll in het register:
+
+Open de Registry Editor (regedit).
+Navigeer naar HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa.
+Voeg de naam van je DLL toe aan de waarde van Notification Packages.
+Zorg ervoor dat de standaard passfilt.dll ook nog steeds in de lijst staat als je die nog wilt gebruiken.
+Bijvoorbeeld, als je aangepaste DLL custompassfilt.dll heet:
+
+makefile
+Code kopiëren
+Default: REG_MULTI_SZ: passfilt custompassfilt
+Herstart de server:
+
+Om de wijzigingen door te voeren, moet de server opnieuw worden opgestart.
+Beleid voor wachtwoordhistorie en -leeftijd
+Configureer via Group Policy zoals eerder beschreven onder 'Standaard Wachtwoordbeleid Configureren'.
+Beleid voor het uitsluiten van gebruikersnaam als wachtwoord
+Dit wordt afgedwongen door de aangepaste passfilt.dll. Zorg ervoor dat deze functionaliteit is geïmplementeerd in de aangepaste DLL.
+
+Monitoring en Beheer
+Gebruik Windows Event Viewer om te controleren of er problemen zijn met wachtwoordwijzigingen en of de aangepaste passfilt.dll correct werkt.
+Voer regelmatige audits uit om te verifiëren dat het wachtwoordbeleid correct wordt nageleefd.
+Door deze stappen te volgen, zorg je ervoor dat het wachtwoordbeleid voldoet aan de gespecificeerde vereisten en dat gebruikers veilige en complexe wachtwoorden gebruiken.

@@ -1,0 +1,66 @@
+Het is alleen voor domain administrators mogelijk om antivirusprogramma’s uit te zetten.
+
+Om ervoor te zorgen dat alleen domain administrators de bevoegdheid hebben om antivirusprogramma's uit te schakelen, kun je gebruik maken van een combinatie van Group Policy-instellingen en het toekennen van de juiste rechten aan de betreffende gebruikers. Hieronder staan de gedetailleerde stappen om dit te configureren.
+
+Stap 1: Configureren van Microsoft Defender Antivirus via Group Policy
+Voorkomen dat gebruikers Microsoft Defender Antivirus uitschakelen
+Open Group Policy Management Console (GPMC):
+
+Zoek naar "Group Policy Management" in het Startmenu of voer gpmc.msc uit.
+Maak een nieuwe GPO of bewerk een bestaande GPO:
+
+Maak een nieuwe GPO en geef deze een naam zoals "Restrict Antivirus Control" of bewerk een bestaande GPO die van toepassing is op de clients en servers.
+Navigeer naar de Microsoft Defender Antivirus-instellingen:
+
+Ga naar Computer Configuration -> Policies -> Administrative Templates -> Windows Components -> Microsoft Defender Antivirus.
+Configureer de relevante instellingen:
+
+Turn off Microsoft Defender Antivirus:
+Instellen op: Disabled
+Dit zorgt ervoor dat gebruikers Microsoft Defender Antivirus niet kunnen uitschakelen.
+Beperk toegang tot Microsoft Defender Antivirus-instellingen:
+
+Allow users to configure Microsoft Defender Antivirus settings:
+Instellen op: Disabled
+Dit voorkomt dat niet-administratieve gebruikers wijzigingen kunnen aanbrengen in de instellingen van Microsoft Defender Antivirus.
+Forceer het beleid op de clients en servers:
+
+Open een command prompt als administrator op de clients en servers en voer gpupdate /force uit.
+Stap 2: Bevoegdheden beperken tot Domain Administrators
+Groepslidmaatschappen controleren en configureren
+Open Active Directory Users and Computers:
+
+Zoek naar "Active Directory Users and Computers" in het Startmenu of voer dsa.msc uit.
+Controleer de groepslidmaatschappen van de Domain Administrators:
+
+Zorg ervoor dat alleen de juiste gebruikers in de "Domain Admins"-groep zitten. Dit kun je doen door de groep "Domain Admins" te openen en de leden te controleren.
+Configureren van rolgebaseerde toegang
+Maak een groep voor gebruikers die geen antivirusprogramma's mogen uitschakelen:
+
+Maak een nieuwe beveiligingsgroep in Active Directory, bijvoorbeeld "Restricted Antivirus Users".
+Voeg gebruikers toe aan deze groep:
+
+Voeg alle niet-administratieve gebruikers toe aan de "Restricted Antivirus Users" groep.
+Maak een groep voor gebruikers die antivirusprogramma's mogen uitschakelen:
+
+Maak een nieuwe beveiligingsgroep in Active Directory, bijvoorbeeld "Antivirus Admins".
+Voeg alleen domain administrators toe aan deze groep:
+
+Voeg de juiste domain administrators toe aan de "Antivirus Admins" groep.
+Stap 3: Specifieke antivirusinstellingen beheren met AppLocker of Software Restriction Policies
+Open Group Policy Management Console (GPMC):
+
+Zoek naar "Group Policy Management" in het Startmenu of voer gpmc.msc uit.
+Maak een nieuwe GPO of bewerk een bestaande GPO:
+
+Maak een nieuwe GPO en geef deze een naam zoals "Antivirus Control Restrictions" of bewerk een bestaande GPO die van toepassing is op de clients en servers.
+Navigeer naar de AppLocker of Software Restriction Policies:
+
+Ga naar Computer Configuration -> Policies -> Windows Settings -> Security Settings -> Application Control Policies -> AppLocker of Software Restriction Policies.
+Configureer regels om te voorkomen dat niet-bevoegde gebruikers antivirusprogramma's kunnen uitschakelen:
+
+Maak een nieuwe regel die voorkomt dat gebruikers buiten de "Antivirus Admins" groep toegang hebben tot de antivirusprogramma’s instellingen.
+Monitoring en Beheer
+Gebruik Windows Event Viewer en Microsoft Endpoint Configuration Manager (voorheen SCCM) om te monitoren of gebruikers proberen om Microsoft Defender Antivirus uit te schakelen.
+Voer regelmatige audits uit om te controleren of de juiste groepslidmaatschappen en beleidsinstellingen worden gehandhaafd.
+Door deze stappen te volgen, zorg je ervoor dat alleen domain administrators de mogelijkheid hebben om antivirusprogramma's uit te schakelen, terwijl andere gebruikers deze mogelijkheid niet hebben.
