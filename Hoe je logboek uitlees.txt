@@ -1,0 +1,6 @@
+Om een logbestand makkelijk uit telezen en er in te zoeken download 
+Notepad++.
+
+Om te weten of iets iets ge kopieerd of gedownload naar een andere lokatie zoek dan op RETR.
+
+(To identify which files have been downloaded or copied to another device, we need to look for specific commands like RETR (retrieve) for downloads and STOR (store) for uploads.)
