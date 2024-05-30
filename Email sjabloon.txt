@@ -1,0 +1,19 @@
+(Dit is de layout van het e-mail sjabloon oefen Ex, dit is hoog waarschijnlijk niet nodig maar just incase)
+
+Beste <vul in>,
+
+Op uw verzoek heb ik de server gecontroleerd.
+
+Bevindingen
+<korte samenvatting bevindingen>
+
+Risico's
+<overzicht risico's>
+
+Adviezen
+<adviezen>
+
+Met vriendelijke groet,
+
+<jouw naam>
+IT expert - SecureIT
